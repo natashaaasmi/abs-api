@@ -47,7 +47,7 @@
                         const term = document.getElementById("term").value;
                         const data = {'termy':term};
                         //resp is an object promise - how to get text out?
-                        getResponse(url, data=data)
+                        getResponse(url, data)
                             .then(response => console.log(`Response is bleh ${response}`))
                         //it's not dealing with the promise response
                         document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
