@@ -3,7 +3,7 @@ import flask
 from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask import request
-
+from flask_cors import CORS
 #--------------------------------
 #langchain code
 from langchain.llms import OpenAI
@@ -23,6 +23,7 @@ def define(term):
 
 #initalizing app
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 #home page

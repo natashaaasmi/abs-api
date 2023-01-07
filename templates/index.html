@@ -19,32 +19,7 @@
         </div>
         <div>
             <script>
-                //define term, url
-                const termForm = document.getElementById("term").value;
-                //data = {'termy': termForm}
                 const url = 'http://127.0.0.1:8000/'
-                //test if termform is captured -> it's an empty string
-                //try accessing termform on click
-                //console.log(data);
-               // console.log(`termform is ${termForm}`);
-
-                //function to post data, get response
-                /*async function getResponse(url, data = {}) {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                            },
-                        body: JSON.stringify(data)
-                    });
-                    return response.json();
-                }*/
-                
-                //post data on click
-                /*document.getElementById("btn").addEventListener("click", getResponse(url, data ={
-                    'termy': termForm
-                }));*/
-                
             </script>
             <p id="textbox">
                 <script>
@@ -54,23 +29,28 @@
                         const response = await fetch(url, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json'
+                                'Content-Type': 'application/json',
+                                'Accept': '*/*',
+                                'Access-Control-Allow-Origin': '*'
                             },
                             body: JSON.stringify(data)
-                        });
-                        return response.text();
+                        })
+                            return response;
+
                         } catch(err){
                             console.log(err);
-                            return [false, null];
+                            return ["FAILURE", false, null];
                         }
                     };
                     
                     document.getElementById("btn").addEventListener("click", function(){
                         const term = document.getElementById("term").value;
                         const data = {'termy':term};
-                        var resp = getResponse(url, data);
+                        //resp is an object promise - how to get text out?
+                        let resp = getResponse(url, data)
+                            .then(response => response.text())
                         //it's not dealing with the promise response
-                       // console.log(`Response is ${resp}`);
+                        console.log(`Response is ${resp}`);
                         document.getElementById("textbox").innerHTML = resp;
                         //document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
                     });
