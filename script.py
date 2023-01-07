@@ -30,9 +30,11 @@ api = Api(app)
 @app.route('/', methods=['GET','POST'])
 def page_home():
     if request.method == 'POST':
-        #term = request.form.get("termy")
-        term = request.args.get('termy')
+        term = request.form.get("termy")
+        #term = request.args.get('termy')
         return define(term)
+    elif request.method =='GET':
+        return "get"
     return flask.render_template('index.html')
 
 #this is the api endpoint
