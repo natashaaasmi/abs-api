@@ -30,16 +30,15 @@
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Accept': '*/*',
                                 'Access-Control-Allow-Origin': '*'
                             },
                             body: JSON.stringify(data)
                         })
-                            return response;
+                            return response.text();
 
                         } catch(err){
                             console.log(err);
-                            return ["FAILURE", false, null];
+                            return ["FAILURE :(", false, null];
                         }
                     };
                     
@@ -48,9 +47,8 @@
                         const data = {'termy':term};
                         //resp is an object promise - how to get text out?
                         getResponse(url, data)
-                            .then(response => response.text())
+                            .then(response => console.log(`Response is bleh ${response}`))
                         //it's not dealing with the promise response
-                        console.log(`Response is ${term}`);
                         document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
                     });
                 </script>
