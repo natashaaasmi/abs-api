@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sample demo</title>
+        <link rel="stylesheet" href="/static/css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+        </script>
+    </head>
+    <body>
+        <h1 id="greeting">Hi, I'm the definer</h1>
+        <div id="chonker">
+            <!--<form id="frm" action="{{ url_for("page_home") }}" method="post">-->
+            <!--testing removing action, url_for and using fetch() instead-->
+            <form id="frm">
+                <input type="text" id="term" name="termy" placeholder="Term">
+                <button id="btn" type="submit">Submit</button>
+            </form>
+        </div>
+        <div>
+            <script>
+                //define term, url
+                const term = document.getElementById("term").value;
+                const url = 'http://127.0.0.1:8000/'
+
+                //function to display data
+                async function dispData(data ={}){
+                    response = getResponse(url, data);
+                    return response.text();
+                }
+                //function to post data, get response
+                async function getResponse(url, data ={}){
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    });
+                    return response.json();
+                }
+                //post on click
+                document.getElementById("btn").addEventListener("click", getResponse);
+            </script>
+            <p id="textbox">
+                <script>
+                    document.getElementById("btn").addEventListener("click", function(){
+                        const term = document.getElementById("term").value;
+                        getResponse(url, {term: term})
+                            .then((data)=> {
+                                console.log(data);
+                            })
+                        document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
+                    });
+                        
+                </script>
+                Receiving response...
+            </p>
+        </div>
+        <p>
+        </p>
+    </body>
+</html>
