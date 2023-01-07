@@ -33,8 +33,6 @@ def page_home():
         term = request.form.get("termy")
         #term = request.args.get('termy')
         return define(term)
-    elif request.method =='GET':
-        return "get"
     return flask.render_template('index.html')
 
 #this is the api endpoint
