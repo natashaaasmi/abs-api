@@ -20,39 +20,60 @@
         <div>
             <script>
                 //define term, url
-                const termform = document.getElementById("term").value;
+                const termForm = document.getElementById("term").value;
+                //data = {'termy': termForm}
                 const url = 'http://127.0.0.1:8000/'
+                //test if termform is captured -> it's an empty string
+                //try accessing termform on click
+                //console.log(data);
+               // console.log(`termform is ${termForm}`);
 
-                //function to display data
-                async function dispData(data ={}){
-                    response = getResponse(url, data);
-                    return response.text();
-                }
                 //function to post data, get response
-                async function getResponse(url, data ={}){
+                /*async function getResponse(url, data = {}) {
                     const response = await fetch(url, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
-                        },
+                            },
                         body: JSON.stringify(data)
                     });
                     return response.json();
-                }
-                //post on click
-                document.getElementById("btn").addEventListener("click", getResponse(url, {term:termform}));
+                }*/
+                
+                //post data on click
+                /*document.getElementById("btn").addEventListener("click", getResponse(url, data ={
+                    'termy': termForm
+                }));*/
+                
             </script>
             <p id="textbox">
                 <script>
+                    //defining get response
+                     async function getResponse(url, data = {}) {
+                        try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        return response.text();
+                        } catch(err){
+                            console.log(err);
+                            return [false, null];
+                        }
+                    };
+                    
                     document.getElementById("btn").addEventListener("click", function(){
                         const term = document.getElementById("term").value;
-                        getResponse(url, {term: term})
-                            .then((data)=> {
-                                console.log(data);
-                            })
-                        document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
+                        const data = {'termy':term};
+                        var resp = getResponse(url, data);
+                        //it's not dealing with the promise response
+                       // console.log(`Response is ${resp}`);
+                        document.getElementById("textbox").innerHTML = resp;
+                        //document.getElementById("textbox").innerHTML = `Defining '${term}'...`;
                     });
-                        
                 </script>
                 Receiving response...
             </p>

@@ -30,7 +30,7 @@ api = Api(app)
 def page_home():
     if request.method == 'POST':
         #term = request.form.get("termy")
-        term = request.args.get('term')
+        term = request.args.get('termy')
         return define(term)
     return flask.render_template('index.html')
 
