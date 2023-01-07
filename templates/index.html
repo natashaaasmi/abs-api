@@ -20,7 +20,7 @@
         <div>
             <script>
                 //define term, url
-                const term = document.getElementById("term").value;
+                const termform = document.getElementById("term").value;
                 const url = 'http://127.0.0.1:8000/'
 
                 //function to display data
@@ -40,7 +40,7 @@
                     return response.json();
                 }
                 //post on click
-                document.getElementById("btn").addEventListener("click", getResponse);
+                document.getElementById("btn").addEventListener("click", getResponse(url, {term:termform}));
             </script>
             <p id="textbox">
                 <script>
