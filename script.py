@@ -30,8 +30,10 @@ api = Api(app)
 @app.route('/', methods=['GET','POST'])
 def page_home():
     if request.method == 'POST':
-        term = request.form.get("termy")
-        #term = request.args.get('termy')
+    #form.get allows for private (browser) API access from HTML form
+        #term = request.form.get("termy")
+    #args allows for public (postman) API access
+        term = request.args.get('termy')
         return define(term)
     return flask.render_template('index.html')
 
